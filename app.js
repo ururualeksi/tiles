@@ -2,9 +2,16 @@ Array.prototype.rand = function () {
   return this[Math.floor(Math.random() * this.length)]
 }
 var palette = ['#d6a2ad', '#c3b59f', '#a0af84', '#668f80', '#4a6670', '#706677', '#565264'];
-var viewportHeight = document.documentElement.clientHeight;
-var viewportWidth = document.documentElement.clientWidth;
+
 var wrapper = document.querySelector('.wrapper');
+
+const getRowHeight = () => {
+  const viewportHeight = document.documentElement.clientHeight;
+  const viewportWidth = document.documentElement.clientWidth;
+  const wrapperStyle = getComputedStyle(wrapper);
+  console.log(Math.round(viewportWidth / 16 - parseInt(wrapperStyle.gridGap) * 2));
+  return Math.round(viewportWidth / 16 - parseInt(wrapperStyle.gridGap) * 2);
+}
 
 const createTile = (x, y, w, h) => {
   const tile = document.createElement('div');
@@ -26,11 +33,7 @@ const appendTile = (tile) => {
   wrapper.appendChild(tile);
 }
 
+wrapper.style.gridAutoRows = getRowHeight() + 'px';
+
 let tile = createTile(1, 1, 1, 1);
 appendTile(tile);
-
-
-
-// wrapper.addEventListener('click', () => {
-//   console.log
-// });
