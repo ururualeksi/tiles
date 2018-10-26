@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+}
+.wrapper {
+  background: #444;
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  grid-auto-rows: minmax(50px, auto);
+  align-items: stretch;
+  grid-gap: 2px;
+}
+
+.wrapper > div {
+  background: #eee;
+  padding: 1em;
+  border-radius: 6px;
+}
+
+.wrapper > div:nth-child(even) {
+  background: #ddd;
+}
+
+.box1 {
+
+}
