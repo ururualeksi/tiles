@@ -13,6 +13,7 @@ const getRowHeight = () => {
   const wrapperStyle = getComputedStyle(wrapper);
   console.log(Math.round(viewportWidth / 16 - parseInt(wrapperStyle.gridGap) * 2));
   return Math.round(viewportWidth / 16 - parseInt(wrapperStyle.gridGap) * 2);
+  console.log(Math.round(viewportWidth / 16 - parseInt(wrapperStyle.gridGap) * 2))
 }
 
 const createTile = (x, y, w, h) => {
@@ -37,6 +38,6 @@ const appendTile = (tile) => {
 
 wrapper.style.gridAutoRows = getRowHeight() + 'px';
 
-appendTile(createTile(2,2,1,1))
-appendTile(createTile(1,2,1,1))
-appendTile(createTile(3,1,2,2))
+appendTile(createTile(1,1,1,1))
+// appendTile(createTile(1,2,1,1))
+// appendTile(createTile(3,1,2,2))
