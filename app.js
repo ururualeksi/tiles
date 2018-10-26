@@ -15,15 +15,19 @@ const getRowHeight = () => {
   return Math.round(parseInt(wrapperStyle.width) / 16 - parseInt(wrapperStyle.gridGap));
 }
 
-const createTile = (w, h) => {
+const createTile = (x, y, w, h) => {
   const tile = document.createElement('div');
   tile.style.background = randomColor()
+  tile.dataset.x = x;
+  tile.dataset.y = y;
   tile.dataset.width = w;
   tile.dataset.height = h;
   return tile;
 }
 
-const appendTile = (tile, leftLine, topLine) => {
+const appendTile = (tile) => {
+  const leftLine = parseInt(tile.dataset.x);
+  const topLine = parseInt(tile.dataset.y);
   const rightLine = leftLine + parseInt(tile.dataset.width);
   const bottomLine = topLine + parseInt(tile.dataset.height);
   tile.style.gridColumn = leftLine + '/' + rightLine;
@@ -33,7 +37,7 @@ const appendTile = (tile, leftLine, topLine) => {
 
 wrapper.style.gridAutoRows = getRowHeight() + 'px';
 
-appendTile(createTile(16, 16), 1, 1)
+appendTile(createTile(1,1,16,16));
 
 // appendTile(createTile(2,1,1,1))
 // appendTile(createTile(3,1,2,2))
