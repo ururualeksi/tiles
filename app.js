@@ -15,8 +15,15 @@ const createTile = (x, y, w, h) => {
 }
 
 const appendTile = (tile) => {
-  wrapper.appendChild(tile);
+  const leftLine = tile.dataset.x;
+  const rightLine = parseInt(tile.dataset.x) + parseInt(tile.dataset.width);
+  const topLine = tile.dataset.y;
+  const bottomLine = parseInt(tile.dataset.y) + parseInt(tile.dataset.height);
+  tile.style.gridColumn = leftLine + '/' + rightLine;
+  tile.style.gridRow = topLine + '/' + bottomLine;
 
+  console.log('x: ' + leftLine + '-' + rightLine + ",\n y: " + topLine + '-' + bottomLine);
+  wrapper.appendChild(tile);
 }
 
 for (var i = 0; i < 256; i++) {
