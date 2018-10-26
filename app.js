@@ -39,40 +39,42 @@ wrapper.style.gridAutoRows = getRowHeight() + 'px';
 
 appendTile(createTile(1,1,16,16));
 
-// appendTile(createTile(2,1,1,1))
-// appendTile(createTile(3,1,2,2))
-
 wrapper.addEventListener('click', (e) => {
   const tile = e.target
   console.log(tile.dataset);
   if (parseInt(tile.dataset.width) === 1) return;
 
-  const x1 = parseInt(tile.dataset.x);
-  const y1 = parseInt(tile.dataset.y);
-  const w1 = parseInt(tile.dataset.width) / 2;
-  console.log(w1);
-  const h1 = parseInt(tile.dataset.height) / 2;
-  appendTile(createTile(x1,y1,w1,h1))
+  const x = parseInt(tile.dataset.x);
+  const y = parseInt(tile.dataset.y);
+  const width = parseInt(tile.dataset.width);
+  const height = parseInt(tile.dataset.height);
 
-  const x2 = parseInt(tile.dataset.x) + parseInt(tile.dataset.width) / 2;
-  const y2 = parseInt(tile.dataset.y);
-  const w2 = parseInt(tile.dataset.width) / 2;
+  const x1 = x;
+  const y1 = y;
+  const w1 = width / 2;
   console.log(w1);
-  const h2 = parseInt(tile.dataset.height) / 2;
-  appendTile(createTile(x2,y2,w2,h2))
+  const h1 = height / 2;
+  appendTile(createTile(x1, y1, w1, h1));
 
-  const x3 = parseInt(tile.dataset.x);
-  const y3 = parseInt(tile.dataset.y) + parseInt(tile.dataset.height) / 2;
-  const w3 = parseInt(tile.dataset.width) / 2;
+  const x2 = x + width / 2;
+  const y2 = y;
+  const w2 = width / 2;
   console.log(w1);
-  const h3 = parseInt(tile.dataset.height) / 2;
-  appendTile(createTile(x3,y3,w3,h3))
+  const h2 = height / 2;
+  appendTile(createTile(x2, y2, w2, h2));
 
-  const x4 = parseInt(tile.dataset.x) + parseInt(tile.dataset.width) / 2;
-  const y4 = parseInt(tile.dataset.y) + parseInt(tile.dataset.height) / 2;
-  const w4 = parseInt(tile.dataset.width) / 2;
+  const x3 = x;
+  const y3 = y + height / 2;
+  const w3 = width / 2;
   console.log(w1);
-  const h4 = parseInt(tile.dataset.height) / 2;
-  appendTile(createTile(x4,y4,w4,h4))
+  const h3 = height / 2;
+  appendTile(createTile(x3, y3, w3, h3));
+
+  const x4 = x + width / 2;
+  const y4 = y + height / 2;
+  const w4 = width / 2;
+  console.log(w1);
+  const h4 = height / 2;
+  appendTile(createTile(x4, y4, w4, h4));
   tile.parentNode.removeChild(tile);
 })
