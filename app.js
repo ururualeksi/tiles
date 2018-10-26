@@ -8,12 +8,11 @@ const randomColor = () => "hsl(" + 360 * Math.random() + ',' +
 var wrapper = document.querySelector('.wrapper');
 
 const getRowHeight = () => {
-  const viewportHeight = document.documentElement.clientHeight;
-  const viewportWidth = document.documentElement.clientWidth;
+  // const viewportHeight = document.documentElement.clientHeight;
+  // const viewportWidth = document.documentElement.clientWidth;
   const wrapperStyle = getComputedStyle(wrapper);
-  console.log(Math.round(viewportWidth / 16 - parseInt(wrapperStyle.gridGap) * 2));
-  return Math.round(viewportWidth / 16 - parseInt(wrapperStyle.gridGap) * 2);
-  console.log(Math.round(viewportWidth / 16 - parseInt(wrapperStyle.gridGap) * 2))
+  console.log(wrapperStyle)
+  return Math.round(parseInt(wrapperStyle.width) / 16 - parseInt(wrapperStyle.gridGap));
 }
 
 const createTile = (x, y, w, h) => {
@@ -39,5 +38,5 @@ const appendTile = (tile) => {
 wrapper.style.gridAutoRows = getRowHeight() + 'px';
 
 appendTile(createTile(1,1,1,1))
-// appendTile(createTile(1,2,1,1))
+appendTile(createTile(2,1,1,1))
 // appendTile(createTile(3,1,2,2))
