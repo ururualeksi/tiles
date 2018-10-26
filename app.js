@@ -1,6 +1,6 @@
 const randomColor = () => "hsl(" + 360 * Math.random() + ',' +
-(50 + 70 * Math.random()) + '%,' +
-(85 + 10 * Math.random()) + '%)';
+(60 + 70 * Math.random()) + '%,' +
+(75 + 10 * Math.random()) + '%)';
 
 const gridSize = Math.pow(2, prompt());
 const wrapper = document.querySelector('.wrapper');
