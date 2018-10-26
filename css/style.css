@@ -9,6 +9,7 @@ body {
   /* grid-auto-rows: minmax(50px, auto); */
   justify-items: stretch;
   grid-gap: 2px;
+
 }
 
 .wrapper > div {
