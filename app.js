@@ -1,17 +1,14 @@
-Array.prototype.rand = function () {
-  return this[Math.floor(Math.random() * this.length)]
-}
 const randomColor = () => "hsl(" + 360 * Math.random() + ',' +
 (50 + 70 * Math.random()) + '%,' +
 (85 + 10 * Math.random()) + '%)';
 
 const wrapper = document.querySelector('.wrapper');
 
-const getRowHeight = () => {
+const computeGridRowHeight = () => {
   const wrapperStyle = getComputedStyle(wrapper);
-  console.log(wrapperStyle)
   return Math.round(parseInt(wrapperStyle.width) / 16 - parseInt(wrapperStyle.gridGap));
 }
+wrapper.style.gridAutoRows = computeGridRowHeight() + 'px';
 
 const createTile = (x, y, w, h) => {
   const tile = document.createElement('div');
@@ -33,7 +30,7 @@ const appendTile = (tile) => {
   wrapper.appendChild(tile);
 }
 
-wrapper.style.gridAutoRows = getRowHeight() + 'px';
+
 
 appendTile(createTile(1,1,16,16));
 
