@@ -8,8 +8,6 @@ const randomColor = () => "hsl(" + 360 * Math.random() + ',' +
 var wrapper = document.querySelector('.wrapper');
 
 const getRowHeight = () => {
-  // const viewportHeight = document.documentElement.clientHeight;
-  // const viewportWidth = document.documentElement.clientWidth;
   const wrapperStyle = getComputedStyle(wrapper);
   console.log(wrapperStyle)
   return Math.round(parseInt(wrapperStyle.width) / 16 - parseInt(wrapperStyle.gridGap));
