@@ -2,7 +2,7 @@ const randomColor = () => "hsl(" + 360 * Math.random() + ',' +
 (60 + 70 * Math.random()) + '%,' +
 (75 + 10 * Math.random()) + '%)';
 
-const gridSize = Math.pow(2, prompt());
+ const gridSize = Math.pow(2, prompt('Число 1-7, будьте так любезны'));
 const wrapper = document.querySelector('.wrapper');
 
 const computeGridRowHeight = () => {
