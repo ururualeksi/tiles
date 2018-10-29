@@ -21,7 +21,7 @@ const appendTile = tile => {
   const leftLine = parseInt(tile.dataset.x);
   const topLine = parseInt(tile.dataset.y);
   const rightLine = leftLine + parseInt(tile.dataset.size);
-  const bottomLine = topLine + parseInt(ti.dataset.size);
+  const bottomLine = topLine + parseInt(tile.dataset.size);
 
   tile.style.gridColumn = leftLine + '/' + rightLine;
   tile.style.gridRow = topLine + '/' + bottomLine;
