@@ -20,11 +20,11 @@ const createTile = (x, y, size) => {
   return tile;
 };
 
-const appendTile = (tile) => {
+const appendTile = tile => {
   const leftLine = parseInt(tile.dataset.x);
   const topLine = parseInt(tile.dataset.y);
   const rightLine = leftLine + parseInt(tile.dataset.size);
-  const bottomLine = topLine + parseInt(tile.dataset.size);
+  const bottomLine = topLine + parseInt(ti.dataset.size);
 
   tile.style.gridColumn = leftLine + '/' + rightLine;
   tile.style.gridRow = topLine + '/' + bottomLine;
@@ -32,7 +32,7 @@ const appendTile = (tile) => {
   wrapper.appendChild(tile);
 };
 
-const breakDownTile = (tile) => {
+const breakDownTile = tile => {
   const x = parseInt(tile.dataset.x);
   const y = parseInt(tile.dataset.y);
   const oldSize = parseInt(tile.dataset.size);
@@ -46,13 +46,13 @@ const breakDownTile = (tile) => {
   };
 };
 
-const isSmallest = (tile) => {
+const isSmallest = tile => {
   return parseInt(tile.dataset.size) === 1;
 };
 
 appendTile(createTile(1, 1, gridSize));
 
-wrapper.addEventListener('click', (e) => {
+wrapper.addEventListener('click', e => {
   if (e.target.classList.contains('wrapper')) return;
 
   const tile = e.target;
