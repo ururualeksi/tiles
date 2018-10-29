@@ -19,65 +19,46 @@ const computeGridRowHeight = () => {
 wrapper.style.gridAutoRows = computeGridRowHeight() + 'px';
 wrapper.style.gridTemplateColumns = "repeat(" + gridSize + ", 1fr)";
 
-const createTile = (x, y, w, h) => {
+const createTile = (x, y, w) => {
   const tile = document.createElement('div');
   tile.style.background = randomColor()
   tile.dataset.x = x;
   tile.dataset.y = y;
-  tile.dataset.width = w;
-  tile.dataset.height = h;
+  tile.dataset.size = w;
   return tile;
 }
 
 const appendTile = (tile) => {
   const leftLine = parseInt(tile.dataset.x);
   const topLine = parseInt(tile.dataset.y);
-  const rightLine = leftLine + parseInt(tile.dataset.width);
-  const bottomLine = topLine + parseInt(tile.dataset.height);
+  const rightLine = leftLine + parseInt(tile.dataset.size);
+  const bottomLine = topLine + parseInt(tile.dataset.size);
   tile.style.gridColumn = leftLine + '/' + rightLine;
   tile.style.gridRow = topLine + '/' + bottomLine;
   wrapper.appendChild(tile);
 }
 
 const isSmallest = (tile) => {
-  return parseInt(tile.dataset.width) === 1;
+  return parseInt(tile.dataset.size) === 1;
 }
 
 const breakDownTile = (tile) => {
   const x = parseInt(tile.dataset.x);
   const y = parseInt(tile.dataset.y);
-  const width = parseInt(tile.dataset.width);
-  const height = parseInt(tile.dataset.height);
-
-  const x1 = x;
-  const y1 = y;
-  const w1 = width / 2;
-  const h1 = height / 2;
-
-  const x2 = x + width / 2;
-  const y2 = y;
-  const w2 = width / 2;
-  const h2 = height / 2;
-
-  const x3 = x;
-  const y3 = y + height / 2;
-  const w3 = width / 2;
-  const h3 = height / 2;
-
-  const x4 = x + width / 2;
-  const y4 = y + height / 2;
-  const w4 = width / 2;
-  const h4 = height / 2;
+  const oldSize = parseInt(tile.dataset.size);
+  const size = oldSize / 2;
 
   return {
-    t1: createTile(x1, y1, w1, h1),
-    t2: createTile(x2, y2, w2, h2),
-    t3: createTile(x3, y3, w3, h3),
-    t4: createTile(x4, y4, w4, h4)
+    t1: createTile(x, y, size),
+    t2: createTile(x + size, y, size),
+    t3: createTile(x, y + size, size),
+    t4: createTile(x + size, y + size, size)
   }
 }
 
-appendTile(createTile(1,1,gridSize,gridSize));
+// entry point
+
+appendTile(createTile(1, 1, gridSize));
 
 wrapper.addEventListener('click', (e) => {
   if (e.target.classList.contains('wrapper')) return;
@@ -85,10 +66,10 @@ wrapper.addEventListener('click', (e) => {
   const tile = e.target
   if (isSmallest(tile)) return;
 
-  const newTilesObject = breakDownTile(tile);
+  const newTiles = breakDownTile(tile);
 
-  Object.keys(newTilesObject).forEach((propertyKey) => {
-    appendTile(newTilesObject[propertyKey]);
+  Object.keys(newTiles).forEach((key) => {
+    appendTile(newTiles[key]);
   });
 
   tile.parentNode.removeChild(tile);
