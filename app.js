@@ -1,19 +1,15 @@
 const randomColor = () => "hsl(" + 360 * Math.random() + ',' + (60 + 70 * Math.random()) + '%,' + (75 + 10 * Math.random()) + '%)';
 
-//const gridSize = Math.pow(2, prompt('Число 1-7, будьте так любезны'));
 const gridSize = Math.pow(2, 7);
-const appContainer = document.querySelector('.app-container');
-const wrapper = document.querySelector('.wrapper');
 
 const clientWidth = document.documentElement.clientWidth;
 const clientHeight = document.documentElement.clientHeight;
-appContainer.style.width = Math.min(clientWidth, clientHeight) + 'px';
-
 const computeGridRowHeight = () => {
   const wrapperStyle = getComputedStyle(wrapper);
   return Math.min(clientWidth, clientHeight) / gridSize - parseInt(wrapperStyle.gridGap);
-}
-
+};
+const wrapper = document.querySelector('.wrapper');
+wrapper.style.width = Math.min(clientWidth, clientHeight) + 'px';
 wrapper.style.gridAutoRows = computeGridRowHeight() + 'px';
 wrapper.style.gridTemplateColumns = "repeat(" + gridSize + ", 1fr)";
 
@@ -24,7 +20,7 @@ const createTile = (x, y, size) => {
   tile.dataset.y = y;
   tile.dataset.size = size;
   return tile;
-}
+};
 
 const appendTile = (tile) => {
   const leftLine = parseInt(tile.dataset.x);
@@ -36,11 +32,7 @@ const appendTile = (tile) => {
   tile.style.gridRow = topLine + '/' + bottomLine;
 
   wrapper.appendChild(tile);
-}
-
-const isSmallest = (tile) => {
-  return parseInt(tile.dataset.size) === 1;
-}
+};
 
 const breakDownTile = (tile) => {
   const x = parseInt(tile.dataset.x);
@@ -53,15 +45,19 @@ const breakDownTile = (tile) => {
     t2: createTile(x + size, y, size),
     t3: createTile(x, y + size, size),
     t4: createTile(x + size, y + size, size)
-  }
-}
+  };
+};
+
+const isSmallest = (tile) => {
+  return parseInt(tile.dataset.size) === 1;
+};
 
 appendTile(createTile(1, 1, gridSize));
 
 wrapper.addEventListener('click', (e) => {
   if (e.target.classList.contains('wrapper')) return;
 
-  const tile = e.target
+  const tile = e.target;
   if (isSmallest(tile)) return;
 
   const newTiles = breakDownTile(tile);
@@ -71,4 +67,4 @@ wrapper.addEventListener('click', (e) => {
   });
 
   tile.parentNode.removeChild(tile);
-})
+});
