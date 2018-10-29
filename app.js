@@ -2,9 +2,6 @@ const randomColor = () => "hsl(" + 360 * Math.random() + ',' + (60 + 70 * Math.r
 
 const gridSize = Math.pow(2, 7);
 
-const clientWidth = document.documentElement.clientWidth;
-const clientHeight = document.documentElement.clientHeight;
-
 const wrapper = document.querySelector('.wrapper');
 wrapper.style.width = '100vmin';
 wrapper.style.height = '100vmin';
