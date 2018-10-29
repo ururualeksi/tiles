@@ -4,13 +4,11 @@ const gridSize = Math.pow(2, 7);
 
 const clientWidth = document.documentElement.clientWidth;
 const clientHeight = document.documentElement.clientHeight;
-const computeGridRowHeight = () => {
-  const wrapperStyle = getComputedStyle(wrapper);
-  return Math.min(clientWidth, clientHeight) / gridSize - parseInt(wrapperStyle.gridGap);
-};
+
 const wrapper = document.querySelector('.wrapper');
-wrapper.style.width = Math.min(clientWidth, clientHeight) + 'px';
-wrapper.style.gridAutoRows = computeGridRowHeight() + 'px';
+wrapper.style.width = '100vmin';
+wrapper.style.height = '100vmin';
+wrapper.style.gridTemplateRows = "repeat(" + gridSize + ", 1fr)";
 wrapper.style.gridTemplateColumns = "repeat(" + gridSize + ", 1fr)";
 
 const createTile = (x, y, size) => {
