@@ -2,7 +2,7 @@ const randomColor = () => "hsl(" + 360 * Math.random() + ',' +
 (60 + 70 * Math.random()) + '%,' +
 (75 + 10 * Math.random()) + '%)';
 
- const gridSize = Math.pow(2, prompt('Число 1-7, будьте так любезны'));
+const gridSize = Math.pow(2, prompt('Число 1-7, будьте так любезны'));
 const wrapper = document.querySelector('.wrapper');
 
 const computeGridRowHeight = () => {
@@ -35,6 +35,8 @@ const appendTile = (tile) => {
 appendTile(createTile(1,1,gridSize,gridSize));
 
 wrapper.addEventListener('click', (e) => {
+  if (e.target.classList.contains('wrapper')) return;
+   
   const tile = e.target
   if (parseInt(tile.dataset.width) === 1) return;
 
