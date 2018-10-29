@@ -39,14 +39,11 @@ const appendTile = (tile) => {
   wrapper.appendChild(tile);
 }
 
-appendTile(createTile(1,1,gridSize,gridSize));
+const isSmallest = (tile) => {
+  return parseInt(tile.dataset.width) === 1;
+}
 
-wrapper.addEventListener('click', (e) => {
-  if (e.target.classList.contains('wrapper')) return;
-
-  const tile = e.target
-  if (parseInt(tile.dataset.width) === 1) return;
-
+const breakDownTile = (tile) => {
   const x = parseInt(tile.dataset.x);
   const y = parseInt(tile.dataset.y);
   const width = parseInt(tile.dataset.width);
@@ -56,25 +53,43 @@ wrapper.addEventListener('click', (e) => {
   const y1 = y;
   const w1 = width / 2;
   const h1 = height / 2;
-  appendTile(createTile(x1, y1, w1, h1));
 
   const x2 = x + width / 2;
   const y2 = y;
   const w2 = width / 2;
   const h2 = height / 2;
-  appendTile(createTile(x2, y2, w2, h2));
 
   const x3 = x;
   const y3 = y + height / 2;
   const w3 = width / 2;
   const h3 = height / 2;
-  appendTile(createTile(x3, y3, w3, h3));
 
   const x4 = x + width / 2;
   const y4 = y + height / 2;
   const w4 = width / 2;
   const h4 = height / 2;
-  appendTile(createTile(x4, y4, w4, h4));
+
+  return {
+    t1: createTile(x1, y1, w1, h1),
+    t2: createTile(x2, y2, w2, h2),
+    t3: createTile(x3, y3, w3, h3),
+    t4: createTile(x4, y4, w4, h4)
+  }
+}
+
+appendTile(createTile(1,1,gridSize,gridSize));
+
+wrapper.addEventListener('click', (e) => {
+  if (e.target.classList.contains('wrapper')) return;
+
+  const tile = e.target
+  if (isSmallest(tile)) return;
+
+  const newTilesObject = breakDownTile(tile);
+
+  Object.keys(newTilesObject).forEach((propertyKey) => {
+    appendTile(newTilesObject[propertyKey]);
+  });
 
   tile.parentNode.removeChild(tile);
 })
