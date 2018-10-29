@@ -2,6 +2,11 @@ body {
   margin: 0;
 }
 
+.app-container {
+  /* width: 400px; */
+  margin: auto;
+}
+
 .wrapper {
   background: #444;
   display: grid;

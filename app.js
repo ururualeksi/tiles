@@ -2,13 +2,20 @@ const randomColor = () => "hsl(" + 360 * Math.random() + ',' +
 (60 + 70 * Math.random()) + '%,' +
 (75 + 10 * Math.random()) + '%)';
 
-const gridSize = Math.pow(2, prompt('Число 1-7, будьте так любезны'));
+//const gridSize = Math.pow(2, prompt('Число 1-7, будьте так любезны'));
+const gridSize = Math.pow(2, 7);
+const appContainer = document.querySelector('.app-container');
 const wrapper = document.querySelector('.wrapper');
+
+const width = document.documentElement.clientWidth;
+const height = document.documentElement.clientHeight;
+appContainer.style.width = Math.min(width, height) + 'px';
 
 const computeGridRowHeight = () => {
   const wrapperStyle = getComputedStyle(wrapper);
-  return Math.round(parseInt(wrapperStyle.width) / gridSize - parseInt(wrapperStyle.gridGap));
+  return Math.min(width, height) / gridSize - parseInt(wrapperStyle.gridGap);
 }
+
 wrapper.style.gridAutoRows = computeGridRowHeight() + 'px';
 wrapper.style.gridTemplateColumns = "repeat(" + gridSize + ", 1fr)";
 
@@ -36,7 +43,7 @@ appendTile(createTile(1,1,gridSize,gridSize));
 
 wrapper.addEventListener('click', (e) => {
   if (e.target.classList.contains('wrapper')) return;
-   
+
   const tile = e.target
   if (parseInt(tile.dataset.width) === 1) return;
 
