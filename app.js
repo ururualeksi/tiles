@@ -1,30 +1,28 @@
-const randomColor = () => "hsl(" + 360 * Math.random() + ',' +
-(60 + 70 * Math.random()) + '%,' +
-(75 + 10 * Math.random()) + '%)';
+const randomColor = () => "hsl(" + 360 * Math.random() + ',' + (60 + 70 * Math.random()) + '%,' + (75 + 10 * Math.random()) + '%)';
 
 //const gridSize = Math.pow(2, prompt('Число 1-7, будьте так любезны'));
 const gridSize = Math.pow(2, 7);
 const appContainer = document.querySelector('.app-container');
 const wrapper = document.querySelector('.wrapper');
 
-const width = document.documentElement.clientWidth;
-const height = document.documentElement.clientHeight;
-appContainer.style.width = Math.min(width, height) + 'px';
+const clientWidth = document.documentElement.clientWidth;
+const clientHeight = document.documentElement.clientHeight;
+appContainer.style.width = Math.min(clientWidth, clientHeight) + 'px';
 
 const computeGridRowHeight = () => {
   const wrapperStyle = getComputedStyle(wrapper);
-  return Math.min(width, height) / gridSize - parseInt(wrapperStyle.gridGap);
+  return Math.min(clientWidth, clientHeight) / gridSize - parseInt(wrapperStyle.gridGap);
 }
 
 wrapper.style.gridAutoRows = computeGridRowHeight() + 'px';
 wrapper.style.gridTemplateColumns = "repeat(" + gridSize + ", 1fr)";
 
-const createTile = (x, y, w) => {
+const createTile = (x, y, size) => {
   const tile = document.createElement('div');
-  tile.style.background = randomColor()
+  tile.style.background = randomColor();
   tile.dataset.x = x;
   tile.dataset.y = y;
-  tile.dataset.size = w;
+  tile.dataset.size = size;
   return tile;
 }
 
@@ -33,8 +31,10 @@ const appendTile = (tile) => {
   const topLine = parseInt(tile.dataset.y);
   const rightLine = leftLine + parseInt(tile.dataset.size);
   const bottomLine = topLine + parseInt(tile.dataset.size);
+
   tile.style.gridColumn = leftLine + '/' + rightLine;
   tile.style.gridRow = topLine + '/' + bottomLine;
+
   wrapper.appendChild(tile);
 }
 
@@ -55,8 +55,6 @@ const breakDownTile = (tile) => {
     t4: createTile(x + size, y + size, size)
   }
 }
-
-// entry point
 
 appendTile(createTile(1, 1, gridSize));
 
